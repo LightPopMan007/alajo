@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+nav {
+    font-family: 'Open Sans', sans-serif;
+}
+/* Header Sytling */
+.header-img {
+    /* max-width: 100%; */
+    max-width: 380px;
+    margin: 0 auto;
+    transform: translateX(-40px);
+}
+.relative {
+    position: relative;
+}
+.card-float {
+    position: absolute;
+    width: 250px;
+    height: auto;
+    z-index: 1;
+}
+.one {
+    top: 30%;
+    left: -35%;
+    animation: floating 2.9s infinite linear;
+}
+@media (max-width: 550px) {
+    .header-img {
+        max-width: 300px;
+    }
+
+    .card-float {
+        width: 200px
+    }
+}
+@media(max-width: 768px) {
+    .one {
+        left: 0;
+        top: 45%;
+    }
+}
+.two {
+    top: 60%;
+    right: 0;
+    animation: floating 4s infinite linear;
+}
+.three {
+    top: 8%;
+    right: 0;
+    animation: appearing 2s linear forwards;
+    animation-delay: 3s;
+    opacity: 0;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-7px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes appearing {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    
+    100% {
+        transform: translateY(-20px);
+        opacity: 1;
+    }
+}
+
+/* Others */
+.bgimg {
+    background: linear-gradient(to right, #0f172ac7, #312e81a6), url("../../public/images/cards.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.l-height {
+    line-height: 40px
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    /* background: #0f172a; */
+    /* background: linear-gradient(to right, #0f172a 0%, #0f172a 50%, #FACC15 50%); */
+    border-radius: 10px;
+    background-size: 200%;
+    transition: .5s;
+}
+.card-info h3 {
+    /* color: #fff; */
+    transition: .3s;
+}
+.card-info span {
+    color: #fff;
+    background: #FACC15;
+    transition: .5s;
+}
+
+.card-info:hover {
+    background-position: 100%;
+    transform: translateY(-10px);
+}
+.card-info:hover span {
+    background: #fff;
+    color: #FACC15;
+}
+.card-info:hover p {
+    color: #fff;
+}
+
+
+.medium-font {
+    font-size: 16px;
+}
+
+.bgStyle {
+    min-height: 200px;
+    border-radius: 5px;
+}
