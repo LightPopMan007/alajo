@@ -22,14 +22,14 @@ export default function Users(props) {
 
     const column = [
         {
-            title: "Customer ID", field: "customer_id", editable: false, headerStyle: {
+            title: "Agent ID", field: "agent_id", editable: false, headerStyle: {
                 backgroundColor: 'orange',
                 fontWeight: 'bold',
-            }, render: (rowData) => <p className="text-ms font-semibold">{rowData.customer_id}</p>
+            }, render: (rowData) => <p className="text-ms font-semibold">TC{rowData.agentId}</p>
         },
 
         {
-            title: "User", editable: false,
+            title: "Agent", editable: false,
             headerStyle: {
                 backgroundColor: 'orange',
                 fontWeight: 'bold',
@@ -37,93 +37,15 @@ export default function Users(props) {
             render: (rowData) => {
                 return (
                     <div className="flex text-sm">
-                        <div className="relative w-8 h-8 mr-3 rounded-full md:block">
-                            <img className="object-cover w-full h-full rounded-full" src={rowData.picture !== null ? (imageLoader({ src: rowData.picture, height: 299, quality: 1 })) : user.default.src} alt="" loading="lazy" />
-                            <div className="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                        </div>
                         <div>
-                            <p className="font-semibold text-black">{rowData.full_name}</p>
+                            <p className="font-semibold text-black">{rowData.firstName} {rowData.lastName}</p>
                             <p className="text-xs text-gray-600">Joined {moment(rowData.created_at).fromNow()}</p>
                         </div>
                     </div>
                 )
             }
         },
-        {
-            title: "Rating", field: "trade_count", editable: false,
-            headerStyle: {
-                backgroundColor: 'orange',
-                fontWeight: 'bold',
-            },
-            render: rowData => (
-                <div className="flex items-center">
-
-                    {
-                        rowData.cardTransactions.length <= 10 && rowData.cardTransactions.length != 0 ? (
-                            <div className="rating">
-                                <input type="radio" name="rating-1" className="mask mask-star-2 bg-gray-400" disabled />
-                            </div>
-                        ) : rowData.cardTransactions.length <= 20 && rowData.cardTransactions.length > 10 ? (
-                            <div className="rating rating-half">
-                                <input type="radio" name="rating-1" className="mask mask-star-2 mask-half-1  bg-orange-400" disabled />
-                            </div>
-                        ) : rowData.cardTransactions.length <= 25 && rowData.cardTransactions.length > 20 ? (
-                            <div className="rating">
-                                <input type="radio" name="rating-1" className="mask mask-star-2  bg-orange-400" disabled />
-                            </div>
-                        ) : rowData.cardTransactions.length <= 30 && rowData.cardTransactions.length > 25 ? (
-                            <div className="rating rating-half">
-                                <input type="radio" name="rating-1" className="rating-hidden" />
-                                <input type="radio" name="rating-1" className="bg-orange-500 mask mask-star-2 mask-half-1" disabled />
-                                <input type="radio" name="rating-1" className="bg-orange-500 mask mask-star-2 mask-half-2" disabled />
-                                <input type="radio" name="rating-1" className="bg-orange-500 mask mask-star-2 mask-half-1" disabled />
-                            </div>
-                        ) : rowData.cardTransactions.length <= 40 && rowData.cardTransactions.length > 30 ? (
-                            <div className="rating rating-half">
-                                <input type="radio" name="rating-1" className="rating-hidden" />
-                                <input type="radio" name="rating-1" className="bg-orange-500 mask mask-star-2 mask-half-1" disabled />
-                                <input type="radio" name="rating-1" className="bg-orange-500 mask mask-star-2 mask-half-2" disabled />
-                                <input type="radio" name="rating-1" className="bg-orange-500 mask mask-star-2 mask-half-1" disabled />
-                                <input type="radio" name="rating-1" className="bg-orange-500 mask mask-star-2 mask-half-2" disabled />
-                            </div>
-                        ) : rowData.cardTransactions.length <= 50 && rowData.cardTransactions.length > 40 ? (
-                            <div className="rating rating-half">
-                                <input type="radio" name="rating-1" className="rating-hidden" />
-                                <input type="radio" name="rating-1" className="bg-orange-500 mask mask-star-2 mask-half-1" disabled />
-                                <input type="radio" name="rating-1" className="bg-orange-500 mask mask-star-2 mask-half-2" disabled />
-                                <input type="radio" name="rating-1" className="bg-orange-500 mask mask-star-2 mask-half-1" disabled />
-                                <input type="radio" name="rating-1" className="bg-orange-500 mask mask-star-2 mask-half-2" disabled />
-                            </div>
-                        ) : "NO RATING YET"
-
-
-                    }
-                </div>
-            )
-        },
-        {
-            title: "Verified", field: "is_verified", editable: false, headerStyle: {
-                backgroundColor: 'orange',
-                fontWeight: 'bold',
-            }, lookup: { true: "Yes", false: "No" },
-            render: rowData => {
-                return (
-                    <div className="flex items-center">
-                        {
-                            rowData.is_verified == true ? (
-                                <div className="badge badge-success gap-2">
-                                    Yes
-                                </div>
-                            ) : (
-                                <div className="badge badge-error gap-2">
-                                    Not Verified
-                                </div>
-                            )
-                        }
-                    </div>
-                )
-            },
-        },
+        
         {
             title: "Status", field: "status",
             lookup: { true: "Active", false: "Banned", 'true': "Active", 'false': "Banned" },
@@ -158,8 +80,8 @@ export default function Users(props) {
                 return (
                     <div className="flex items-center">
                         {
-                            rowData.userWallet !== undefined || rowData.userWallet.amount != '0' ? (
-                                <p className="text-ms font-semibold">{rowData.userWallet?.amount}</p>) : (
+                            rowData !== undefined || rowData.amount != '0' ? (
+                                <p className="text-ms font-semibold">${rowData.amount}</p>) : (
                                 <p className="text-ms font-semibold">0</p>
                             )
                         }
@@ -208,8 +130,8 @@ export default function Users(props) {
                                                     icon: Visibility,
                                                     tooltip: "View User",
                                                     onClick: (event, rowData) => {
-                                                        if (rowData.is_verified == true) {
-                                                            Router.push(`/admin/users/${rowData.id}`);
+                                                        if (rowData.isVerified == true) {
+                                                            Router.push(`/admin/agents/2`);
                                                         } else {
                                                             alert("User is not verified")
                                                         }
@@ -259,15 +181,43 @@ export default function Users(props) {
 export async function getServerSideProps(context) {
     const session = await getSession(context);
     try {
-        const user = await Server.get('/admin/users', {
-            headers: {
-                Authorization: `Bearer ${session?.accessToken}`,
+        const user = [
+            {
+              agentId: '001',
+              firstName: 'John',
+              lastName: 'Smith',
+              address: 'Raven Avenue, P.O Box 350',
+              phone: '555 5555 555',
+              status: 'true',
+              email: 'johnfsmith@gmail.com',
+              createdAt: 'May 16, 2016',
+              updatedAt: 'May 14, 2022',
+              amount: '3,500',
+              isVerified: 1
             },
-        });
+            {
+              agentId: '002',
+              firstName: 'Peter',
+              lastName: 'Alfie',
+              address: 'Raven Avenue, P.O Box 350',
+              phone: '554 5345 555',
+              status: 'true',
+              email: 'peteralfie@gmail.com',
+              createdAt: 'May 16, 2016',
+              updatedAt: 'May 14, 2022',
+              amount: '2,000',
+              isVerified: 0
+            }
+          ]
+        // const user = await Server.get('/admin/users', {
+        //     headers: {
+        //         Authorization: `Bearer ${session?.accessToken}`,
+        //     },
+        // });
         // console.log(user);
         return {
             props: {
-                userData: user.data.message,
+                userData: user,
             },
         }
     } catch (error) {

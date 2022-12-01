@@ -12,7 +12,7 @@ const data = [
   {
     title: 'Manage Agents',
     icon: <Icon.FiUsers size={'20px'} color='gold'/>,
-    link: '/admin/users',
+    link: '/admin/agents',
   },
   {
     title: 'Add Agent',

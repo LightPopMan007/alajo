@@ -8,7 +8,7 @@ const responseErrorHandler = (error) => {
   if (error.response) {
     if (error.response.status > 300) {
       if (typeof window === 'undefined'){
-         throw new error
+         console.log(error)
       } else {
         window.location.href = '/auth/logout';
       }
